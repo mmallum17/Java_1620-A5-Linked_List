@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.awt.Point;
 
 /**
  * Created by Marcus on 7/14/2016.
@@ -15,11 +16,11 @@ public class GraphVertex implements Comparable<GraphVertex>
         edges = new LinkedList<Point>();
         if(vertexType == START_VERTEX)
         {
-            setDistanceFromStart(0);
+            distanceFromStart = 0;
         }
         else
         {
-            setDistanceFromStart(Integer.MAX_VALUE);
+            distanceFromStart = Integer.MAX_VALUE;
         }
     }
 
@@ -40,7 +41,13 @@ public class GraphVertex implements Comparable<GraphVertex>
 
     public void relaxEdges(Graph g)
     {
-
+        int size  = edges.size();
+        Point point;
+        for(int position = 0; position < size; position++)
+        {
+            point = edges.get(position);
+            g.setVertexDistanceFromStart(point.x, point.y + this.getDistanceFromStart());
+        }
     }
 
     @Override

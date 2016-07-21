@@ -48,10 +48,15 @@ public class Graph
             visited[position] = false;
         }
 
-        while((graphVertex = extractMinVertex(visited)) != null)
+        do
         {
-            graphVertex.relaxEdges(this);
-        }
+            graphVertex = extractMinVertex(visited);
+            if(graphVertex != null)
+            {
+                graphVertex.relaxEdges(this);
+
+            }
+        }while(graphVertex != null);
         return vertices.getLast().getDistanceFromStart();
     }
 

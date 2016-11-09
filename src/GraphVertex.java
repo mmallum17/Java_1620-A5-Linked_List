@@ -20,6 +20,7 @@ public class GraphVertex implements Comparable<GraphVertex>
         }
         else
         {
+            // Set distance to infinity
             distanceFromStart = Integer.MAX_VALUE;
         }
     }
@@ -36,6 +37,7 @@ public class GraphVertex implements Comparable<GraphVertex>
 
     public void setDistanceFromStart(int distance)
     {
+        // Update distance from start if passed distance is smaller
         distanceFromStart = Math.min(distanceFromStart, distance);
     }
 
@@ -43,9 +45,11 @@ public class GraphVertex implements Comparable<GraphVertex>
     {
         int size  = edges.size();
         Point point;
+        // Update all adjacent vertex's with new distance if smaller
         for(int position = 0; position < size; position++)
         {
             point = edges.get(position);
+            // Set adjacent vertex's distance to (edge weight + distance from start) if smaller
             g.setVertexDistanceFromStart(point.x, point.y + this.getDistanceFromStart());
         }
     }

@@ -19,6 +19,7 @@ public class Graph
         }
     }
 
+    // Adds an edge to a vertex
     public void addEdge(int vertex1, int vertex2, int distance) {
         if (vertex1 >= vertices.size() || vertex1 < 0)
         {
@@ -43,20 +44,25 @@ public class Graph
     {
         boolean[] visited = new boolean[vertices.size()];
         GraphVertex graphVertex;
+        // Initialize all elements to false
         for (int position = 0; position < visited.length; position++)
         {
             visited[position] = false;
         }
 
+        // While vertices are unprocessed
         do
         {
+            // Get minimum vertex
             graphVertex = extractMinVertex(visited);
+            // Relax edges of that vertex
             if(graphVertex != null)
             {
                 graphVertex.relaxEdges(this);
 
             }
         }while(graphVertex != null);
+
         return vertices.getLast().getDistanceFromStart();
     }
 
@@ -64,11 +70,12 @@ public class Graph
     {
         GraphVertex smallest;
         int smallPosition = 0;
+        // Find first element in array that is false
         while(smallPosition < visited.length && visited[smallPosition])
         {
             smallPosition++;
         }
-
+        // If all vertices have been processed
         if (smallPosition == visited.length)
         {
             return null;
@@ -76,6 +83,7 @@ public class Graph
         else
         {
             smallest = vertices.get(smallPosition);
+            // Get smallest unprocessed vertex
             for (int position = smallPosition + 1; position < visited.length; position++)
             {
                 if ((!visited[position]) && smallest.compareTo(vertices.get(position)) > 0)
